@@ -27,7 +27,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Application.Services
             return await _repository.DeleteEmployee(id);
         }
 
-        public async Task<EmployeeDto> GetEmployee(int id)
+        public async Task<EmployeeDto?> GetEmployee(int id)
         {
             var employee = await _repository.GetEmployee(id);
             return _mapper.Map<EmployeeDto>(employee);

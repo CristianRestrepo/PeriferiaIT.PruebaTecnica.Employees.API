@@ -20,6 +20,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure
                 options.UseSqlServer(configuration["ConnectionString:EmployeeDB"] ?? "");
             });
 
+            
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             return services;

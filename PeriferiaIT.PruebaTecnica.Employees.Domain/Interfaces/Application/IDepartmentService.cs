@@ -14,7 +14,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Application
 
         public Task<bool> DeleteDepartment(int id);
 
-        public Task<DepartmentDto> GetDepartment(int id);
+        public Task<DepartmentDto?> GetDepartment(int id);
 
         public Task<IEnumerable<DepartmentDto>> GetDepartments();
 

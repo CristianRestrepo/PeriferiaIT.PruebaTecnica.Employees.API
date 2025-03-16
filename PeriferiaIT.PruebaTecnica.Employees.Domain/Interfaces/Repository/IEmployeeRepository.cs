@@ -11,7 +11,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Repository
     {
         public Task<IEnumerable<Employee>> GetEmployees();
 
-        public Task<Employee> GetEmployee(int id);
+        public Task<Employee?> GetEmployee(int id);
 
         public Task AddEmployee(Employee employee);
 

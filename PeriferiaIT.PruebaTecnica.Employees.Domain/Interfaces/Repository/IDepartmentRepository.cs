@@ -11,7 +11,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Repository
     {
         Task<IEnumerable<Department>> GetDepartments();
 
-        Task<Department> GetDepartment(int id);
+        Task<Department?> GetDepartment(int id);
 
         Task AddDepartment(Department department);
 
