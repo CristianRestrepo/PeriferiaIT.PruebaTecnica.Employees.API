@@ -1,0 +1,6 @@
+@PeriferiaIT.PruebaTecnica.Employees.API_HostAddress = http://localhost:5153
+
+GET {{PeriferiaIT.PruebaTecnica.Employees.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

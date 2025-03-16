@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeriferiaIT.PruebaTecnica.Employees.API", "PeriferiaIT.PruebaTecnica.Employees.API\PeriferiaIT.PruebaTecnica.Employees.API.csproj", "{7432EACB-0D1A-4A64-859F-58F9D0D7C468}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeriferiaIT.PruebaTecnica.Employees.Application", "PeriferiaIT.PruebaTecnica.Employees.Application\PeriferiaIT.PruebaTecnica.Employees.Application.csproj", "{FEE43B5A-FA3C-436B-BFDE-A404D00E8306}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeriferiaIT.PruebaTecnica.Employees.Domain", "PeriferiaIT.PruebaTecnica.Employees.Domain\PeriferiaIT.PruebaTecnica.Employees.Domain.csproj", "{B8F8AE5E-AC2D-4E45-998C-A99D27914C66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeriferiaIT.PruebaTecnica.Employees.Infraestructure", "PeriferiaIT.PruebaTecnica.Employees.Infraestructure\PeriferiaIT.PruebaTecnica.Employees.Infraestructure.csproj", "{AA30F270-9C60-4F9E-82DA-A4E3618F9565}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeriferiaIT.PruebaTecnica.Employees.Test", "PeriferiaIT.PruebaTecnica.Employees.Test\PeriferiaIT.PruebaTecnica.Employees.Test.csproj", "{A29C152A-EA44-45FB-8E94-4A9A8D29D4DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7432EACB-0D1A-4A64-859F-58F9D0D7C468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7432EACB-0D1A-4A64-859F-58F9D0D7C468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7432EACB-0D1A-4A64-859F-58F9D0D7C468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7432EACB-0D1A-4A64-859F-58F9D0D7C468}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEE43B5A-FA3C-436B-BFDE-A404D00E8306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE43B5A-FA3C-436B-BFDE-A404D00E8306}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE43B5A-FA3C-436B-BFDE-A404D00E8306}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE43B5A-FA3C-436B-BFDE-A404D00E8306}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8F8AE5E-AC2D-4E45-998C-A99D27914C66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8F8AE5E-AC2D-4E45-998C-A99D27914C66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8F8AE5E-AC2D-4E45-998C-A99D27914C66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8F8AE5E-AC2D-4E45-998C-A99D27914C66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA30F270-9C60-4F9E-82DA-A4E3618F9565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA30F270-9C60-4F9E-82DA-A4E3618F9565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA30F270-9C60-4F9E-82DA-A4E3618F9565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA30F270-9C60-4F9E-82DA-A4E3618F9565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A29C152A-EA44-45FB-8E94-4A9A8D29D4DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A29C152A-EA44-45FB-8E94-4A9A8D29D4DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A29C152A-EA44-45FB-8E94-4A9A8D29D4DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A29C152A-EA44-45FB-8E94-4A9A8D29D4DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {683BC369-378B-45B7-BB1E-ABF57B7B0BD6}
+	EndGlobalSection
+EndGlobal
