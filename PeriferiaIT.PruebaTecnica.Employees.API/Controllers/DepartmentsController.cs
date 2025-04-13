@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Dto;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Application;
@@ -7,6 +8,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DepartmentsController(IDepartmentService _service) : ControllerBase
     {
 
