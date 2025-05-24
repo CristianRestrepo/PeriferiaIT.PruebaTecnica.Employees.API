@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using PeriferiaIT.PruebaTecnica.Employees.Application.Departments.Commands;
+using PeriferiaIT.PruebaTecnica.Employees.Application.Employees.Commands;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Dto;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Entities;
 
@@ -8,10 +10,10 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Application.Mapper
     {
         public AutoMapperProfile()
         {
-            CreateMap<Employee, AddEmployeeDto>().ReverseMap();
-            CreateMap<Department, AddDepartmentDto>().ReverseMap();
-            CreateMap<EmployeeDto, AddEmployeeDto>().ReverseMap();
-            CreateMap<DepartmentDto, AddDepartmentDto>().ReverseMap();
+            CreateMap<Employee, CreateEmployeeCommand>().ReverseMap();
+            CreateMap<Department, CreateDepartmentCommand>().ReverseMap();
+            CreateMap<EmployeeDto, CreateEmployeeCommand>().ReverseMap();
+            CreateMap<DepartmentDto, CreateDepartmentCommand>().ReverseMap();
             CreateMap<Employee, EmployeeDto>().ReverseMap();
             CreateMap<Department, DepartmentDto>().ReverseMap();
 

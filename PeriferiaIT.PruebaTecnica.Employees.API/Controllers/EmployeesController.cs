@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PeriferiaIT.PruebaTecnica.Employees.Application.Employees.Commands;
+using PeriferiaIT.PruebaTecnica.Employees.Application.Employees.Querys;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Dto;
-using PeriferiaIT.PruebaTecnica.Employees.Domain.Entities;
-using PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Application;
-using PeriferiaIT.PruebaTecnica.Employees.Infraestructure;
 
 namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController(IEmployeeService _service) : ControllerBase
+    public class EmployeesController(IMediator mediator) : ControllerBase
     {
         
         [HttpGet]
@@ -23,7 +18,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetEmployees()
         {
-            var employees = await _service.GetEmployees();
+            var employees = await mediator.Send(new GetAllEmployeesQuery());
             return Ok(employees);
         }
 
@@ -34,7 +29,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<EmployeeDto>> GetEmployee(int id)
         {
-            var employee = await _service.GetEmployee(id);
+            var employee = await mediator.Send(new GetEmployeeQuery() { Id = id});
 
             if (employee == null)
             {
@@ -49,16 +44,16 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PutEmployee(int id, EmployeeDto employee)
+        public async Task<IActionResult> PutEmployee(int id, UpdateEmployeeCommand command)
         {
-            if (id != employee.Id)
+            if (id != command.Id)
             {
                 return BadRequest();
             }
                      
             try
             {
-                await _service.UpdateEmployee(employee);
+                await mediator.Send(command);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -79,10 +74,10 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<EmployeeDto>> PostEmployee(AddEmployeeDto employee)
+        public async Task<ActionResult<EmployeeDto>> PostEmployee(CreateEmployeeCommand command)
         {
             
-            EmployeeDto newEmployee = await _service.AddEmployee(employee);
+            EmployeeDto newEmployee = await mediator.Send(command);
             return CreatedAtAction("GetEmployee", new { id = newEmployee.Id }, newEmployee);
         }
 
@@ -93,7 +88,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteEmployee(int id)
         {
-            var result = await _service.DeleteEmployee(id);
+            var result = await mediator.Send(new DeleteEmployeeCommand() { Id = id});
             if (!result)
             {
                 return NotFound();
@@ -103,7 +98,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
 
         private bool EmployeeExists(int id)
         {
-            var employees = _service.GetEmployees().GetAwaiter().GetResult();
+            var employees = mediator.Send(new GetAllEmployeesQuery()).GetAwaiter().GetResult();
             return employees.Any(e => e.Id == id);
         }
     }

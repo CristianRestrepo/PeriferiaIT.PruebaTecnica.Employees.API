@@ -1,19 +1,23 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PeriferiaIT.PruebaTecnica.Employees.Application.Departments.Commands;
+using PeriferiaIT.PruebaTecnica.Employees.Application.Departments.Querys;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Dto;
-using PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Application;
 
 namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class DepartmentsController(IDepartmentService _service) : ControllerBase
+    public class DepartmentsController(
+        IMediator mediator) : ControllerBase
     {
+       
 
         /// <summary>
-        /// Get all departments
+        /// Get all departments.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -22,12 +26,12 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetDepartments()
         {
-            var departments = await _service.GetDepartments();
+            var departments = await mediator.Send(new GetAllDepartmentQuery());
             return Ok(departments);
         }
 
         /// <summary>
-        /// Get all employees by department
+        /// Get all employees by department.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -37,7 +41,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetEmployeesByDepartment(int id)
         {
-            var employees = await _service.GetEmployeesByDepartment(id);
+            var employees = await mediator.Send(new GetEmployeesByDepartmentQuery() { Id = id });
             return Ok(employees);
         }
 
@@ -53,7 +57,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<DepartmentDto>> GetDepartment(int id)
         {
-            var department = await _service.GetDepartment(id);
+            var department = await mediator.Send(new GetDepartmentQuery() { Id = id});
 
             if (department == null)
             {
@@ -74,16 +78,16 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PutDepartment(int id, DepartmentDto department)
+        public async Task<IActionResult> PutDepartment(int id, UpdateDepartmentCommand command)
         {
-            if (id != department.Id)
+            if (id != command.Id)
             {
                 return BadRequest();
             }           
 
             try
             {
-                await _service.UpdateDepartment(department);
+                await mediator.Send(command);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -109,10 +113,10 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [ProducesResponseType(typeof(DepartmentDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<DepartmentDto>> PostDepartment(AddDepartmentDto department)
+        public async Task<ActionResult<DepartmentDto>> PostDepartment(CreateDepartmentCommand command)
         {
-            DepartmentDto departmentResponse = await _service.AddDepartment(department);
-            return CreatedAtAction("GetDepartment", new { id = departmentResponse.Id }, departmentResponse);
+            DepartmentDto response = await mediator.Send(command);
+            return CreatedAtAction("GetDepartment", new { id = response.Id }, response);
         }
 
         /// <summary>
@@ -127,7 +131,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteDepartment(int id)
         {
-            var result = await _service.DeleteDepartment(id);
+            var result = await mediator.Send(new DeleteDepartmentCommand(id));
             if (!result)
             {
                 return NotFound();
@@ -137,7 +141,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
 
         private bool DepartmentExists(int id)
         {
-            var departments = _service.GetDepartments().GetAwaiter().GetResult();
+            var departments =  mediator.Send(new GetAllDepartmentQuery()).GetAwaiter().GetResult();
             return departments.Any(e => e.Id == id);
         }
     }

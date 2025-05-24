@@ -1,6 +1,7 @@
+using System.Reflection;
 using System.Text.Json.Serialization;
 using PeriferiaIT.PruebaTecnica.Employees.Application;
-using PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Application;
+using PeriferiaIT.PruebaTecnica.Employees.Domain;
 using PeriferiaIT.PruebaTecnica.Employees.Infraestructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddInfraestructure(builder.Configuration);
 builder.Services.AddApplication();
+builder.Services.AddDomain();
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
