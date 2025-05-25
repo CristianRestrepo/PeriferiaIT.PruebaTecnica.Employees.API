@@ -3,11 +3,6 @@ using MediatR;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Common;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Entities;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeriferiaIT.PruebaTecnica.Employees.Application.Employees.Commands
 {
@@ -21,11 +16,11 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Application.Employees.Commands
         public required int DepartmentId { get; set; }
     };
 
-    class UpdateEmployeeCommandHandler(IEmployeeRepository repository, IMapper _mapper) : IRequestHandler<UpdateEmployeeCommand, Unit>
+    public class UpdateEmployeeCommandHandler(IEmployeeRepository repository, IMapper _mapper) : IRequestHandler<UpdateEmployeeCommand, Unit>
     {
         public async Task<Unit> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            await repository.UpdateEmployee(_mapper.Map<Employee>(request));
+            await repository.UpdateEmployee(_mapper.Map<Employee>(request), cancellationToken);
             return Unit.Value;
         }
     }

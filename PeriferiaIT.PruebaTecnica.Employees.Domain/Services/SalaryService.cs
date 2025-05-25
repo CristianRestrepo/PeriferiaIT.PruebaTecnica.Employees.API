@@ -16,7 +16,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Domain.Services
             {
                 bonus = (salary * 20) / 100; ;
             }
-            return salary = bonus;
+            return salary + bonus;
         }
     }
 }

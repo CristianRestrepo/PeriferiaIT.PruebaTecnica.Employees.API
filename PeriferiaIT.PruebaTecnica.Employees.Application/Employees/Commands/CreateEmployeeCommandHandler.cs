@@ -16,13 +16,13 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Application.Employees.Commands
         public JobPosition Position { get; set; }
         public required int DepartmentId { get; set; }
     };
-    class CreateEmployeeCommandHandler(IEmployeeRepository _repository, IMapper _mapper, ISalaryService salaryService) : IRequestHandler<CreateEmployeeCommand, EmployeeDto>
+    public class CreateEmployeeCommandHandler(IEmployeeRepository _repository, IMapper _mapper, ISalaryService salaryService) : IRequestHandler<CreateEmployeeCommand, EmployeeDto>
     {
         public async Task<EmployeeDto> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
             Employee newEmployee = _mapper.Map<Employee>(request);
             newEmployee.Salary = salaryService.CalculateSalary(newEmployee.Salary, newEmployee.Position);
-            await _repository.AddEmployee(newEmployee);
+            await _repository.AddEmployee(newEmployee, cancellationToken);
             return _mapper.Map<EmployeeDto>(newEmployee);
         }
     }

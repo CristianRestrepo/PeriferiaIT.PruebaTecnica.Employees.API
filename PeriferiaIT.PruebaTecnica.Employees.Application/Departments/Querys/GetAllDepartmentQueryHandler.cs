@@ -2,11 +2,6 @@
 using MediatR;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Dto;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeriferiaIT.PruebaTecnica.Employees.Application.Departments.Querys
 {
@@ -18,7 +13,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Application.Departments.Querys
     {
         public async Task<List<DepartmentDto>> Handle(GetAllDepartmentQuery request, CancellationToken cancellationToken)
         {
-            var departments = await repository.GetDepartments();
+            var departments = await repository.GetDepartments(cancellationToken);
             return mapper.Map<List<DepartmentDto>>(departments);
         }
     }

@@ -14,9 +14,10 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Application.Mapper
             CreateMap<Department, CreateDepartmentCommand>().ReverseMap();
             CreateMap<EmployeeDto, CreateEmployeeCommand>().ReverseMap();
             CreateMap<DepartmentDto, CreateDepartmentCommand>().ReverseMap();
+            CreateMap<Employee, UpdateEmployeeCommand>().ReverseMap();
+            CreateMap<Department, UpdateDepartmentCommand>().ReverseMap();
             CreateMap<Employee, EmployeeDto>().ReverseMap();
             CreateMap<Department, DepartmentDto>().ReverseMap();
-
         }   
     }
 }

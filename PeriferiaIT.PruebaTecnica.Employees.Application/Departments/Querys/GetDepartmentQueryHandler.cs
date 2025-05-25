@@ -20,7 +20,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Application.Departments.Querys
     {
         public async Task<DepartmentDto> Handle(GetDepartmentQuery request, CancellationToken cancellationToken)
         {
-            var department = await repository.GetDepartment(request.Id);
+            var department = await repository.GetDepartment(request.Id, cancellationToken);
             return mapper.Map<DepartmentDto>(department);
         }
     }

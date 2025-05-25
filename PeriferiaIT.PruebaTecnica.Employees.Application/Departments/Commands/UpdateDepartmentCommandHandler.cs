@@ -2,11 +2,6 @@
 using MediatR;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Entities;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeriferiaIT.PruebaTecnica.Employees.Application.Departments.Commands
 {
@@ -20,7 +15,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Application.Departments.Commands
     {
         public async Task<Unit> Handle(UpdateDepartmentCommand request, CancellationToken cancellationToken)
         {
-            await repository.UpdateDepartment(mapper.Map<Department>(request));
+            await repository.UpdateDepartment(mapper.Map<Department>(request), cancellationToken);
             return Unit.Value;
         }
     }

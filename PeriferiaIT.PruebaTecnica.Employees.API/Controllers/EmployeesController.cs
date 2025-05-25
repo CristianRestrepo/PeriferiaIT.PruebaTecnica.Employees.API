@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PeriferiaIT.PruebaTecnica.Employees.Application.Employees.Commands;
@@ -8,7 +9,9 @@ using PeriferiaIT.PruebaTecnica.Employees.Domain.Dto;
 namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    
     public class EmployeesController(IMediator mediator) : ControllerBase
     {
         

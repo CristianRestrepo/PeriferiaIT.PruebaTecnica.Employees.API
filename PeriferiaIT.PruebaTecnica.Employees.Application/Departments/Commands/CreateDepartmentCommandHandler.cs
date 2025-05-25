@@ -16,7 +16,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Application.Departments.Commands
         public async Task<DepartmentDto> Handle(CreateDepartmentCommand request, CancellationToken cancellationToken)
         {
             Department newDepartment = mapper.Map<Department>(request);
-            await repository.AddDepartment(newDepartment);
+            await repository.AddDepartment(newDepartment, cancellationToken);
             return mapper.Map<DepartmentDto>(newDepartment);
         }
     }

@@ -19,7 +19,8 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure
             {
                 options.UseSqlServer(configuration["ConnectionString:EmployeeDB"] ?? "");
             });
-                        
+
+            services.AddTransient<IDbContext, EmployeeDBContext>();
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<IDepartmentRepository, DepartmentRepository>();
             return services;

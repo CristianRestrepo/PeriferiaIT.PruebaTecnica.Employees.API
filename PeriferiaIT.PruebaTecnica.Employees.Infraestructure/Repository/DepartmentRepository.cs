@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Entities;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Repository;
 
 namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure.Repository
 {
-    public class DepartmentRepository(EmployeeDBContext _context, ILogger<DepartmentRepository> _logger) : IDepartmentRepository
+    public class DepartmentRepository(IDbContext _context, ILogger<DepartmentRepository> _logger) : IDepartmentRepository
     {
-        public async Task AddDepartment(Department department)
+        public async Task AddDepartment(Department department, CancellationToken cancellationToken)
         {
             try
             {
                 _context.Departments.Add(department);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
             }
             catch (Exception e)
             {
@@ -26,11 +21,11 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure.Repository
             }
         }
 
-        public async Task<bool> DeleteDepartment(int id)
+        public async Task<bool> DeleteDepartment(int id, CancellationToken cancellationToken)
         {
             try
             {
-                var department = await _context.Departments.FindAsync(id);
+                var department = await _context.Departments.FindAsync(id, cancellationToken);
 
                 if (department == null)
                 {
@@ -49,11 +44,11 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure.Repository
            
         }
 
-        public async Task<Department?> GetDepartment(int id)
+        public async Task<Department?> GetDepartment(int id, CancellationToken cancellationToken)
         {
             try
             {
-                return await _context.Departments.FindAsync(id);
+                return await _context.Departments.FindAsync(id, cancellationToken);
             }
             catch (Exception e)
             {
@@ -63,11 +58,11 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure.Repository
                     
         }
 
-        public async Task<IEnumerable<Department>> GetDepartments()
+        public async Task<IEnumerable<Department>> GetDepartments(CancellationToken cancellationToken)
         {
             try
             {
-                return await _context.Departments.ToListAsync();
+                return await _context.Departments.ToListAsync(cancellationToken);
             }
             catch (Exception e)
             {
@@ -77,12 +72,12 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure.Repository
             
         }
 
-        public async Task UpdateDepartment(Department department)
+        public async Task UpdateDepartment(Department department, CancellationToken cancellationToken)
         {
             try
             {
                 _context.Entry(department).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
             }
             catch (Exception e )
             {

@@ -9,8 +9,8 @@ using PeriferiaIT.PruebaTecnica.Employees.Domain.Dto;
 namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     [Authorize]
+    [ApiController]   
     public class DepartmentsController(
         IMediator mediator) : ControllerBase
     {
@@ -46,7 +46,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         }
 
         /// <summary>
-        /// Get department by id
+        /// Get department by id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -68,7 +68,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         }
 
         /// <summary>
-        /// Update department
+        /// Update department.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="department"></param>
@@ -105,7 +105,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         }
 
         /// <summary>
-        /// Add department
+        /// Add department.
         /// </summary>
         /// <param name="department"></param>
         /// <returns></returns>
@@ -120,7 +120,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         }
 
         /// <summary>
-        /// Delete department
+        /// Delete department.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -131,12 +131,28 @@ namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteDepartment(int id)
         {
-            var result = await mediator.Send(new DeleteDepartmentCommand(id));
+            var result = await mediator.Send(new DeleteDepartmentCommand() { Id = id});
             if (!result)
             {
                 return NotFound();
             }
             return Ok();
+        }
+
+        /// <summary>
+        /// Total salary by department.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}/totalSalary")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetTotalSalaryByDepartment(int id)
+        {
+            var result = await mediator.Send(new GetSalaryByDepartmentQuery() { Id = id });           
+            return Ok(result);
         }
 
         private bool DepartmentExists(int id)

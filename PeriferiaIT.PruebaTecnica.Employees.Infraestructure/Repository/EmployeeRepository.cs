@@ -5,14 +5,14 @@ using PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Repository;
 
 namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure.Repository
 {
-    public class EmployeeRepository(EmployeeDBContext _context, ILogger<EmployeeRepository> _logger) : IEmployeeRepository
+    public class EmployeeRepository(IDbContext _context, ILogger<EmployeeRepository> _logger) : IEmployeeRepository
     {
-        public async Task AddEmployee(Employee employee)
+        public async Task AddEmployee(Employee employee, CancellationToken cancellationToken)
         {
             try
             {
                 _context.Employees.Add(employee);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
             }
             catch (Exception e)
             {
@@ -22,7 +22,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure.Repository
 
         }
 
-        public async Task<bool> DeleteEmployee(int id)
+        public async Task<bool> DeleteEmployee(int id, CancellationToken cancellationToken)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure.Repository
                 }
 
                 _context.Employees.Remove(employee);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
                 return true;
             }
             catch (Exception e)
@@ -44,11 +44,11 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure.Repository
 
         }
 
-        public async Task<Employee?> GetEmployee(int id)
+        public async Task<Employee?> GetEmployee(int id, CancellationToken cancellationToken)
         {
             try
             {
-                return await _context.Employees.FindAsync(id);
+                return await _context.Employees.FindAsync(id, cancellationToken);
             }
             catch (Exception e)
             {
@@ -58,11 +58,11 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure.Repository
 
         }
 
-        public async Task<IEnumerable<Employee>> GetEmployees()
+        public async Task<IEnumerable<Employee>> GetEmployees(CancellationToken cancellationToken)
         {
             try
             {
-                return await _context.Employees.ToListAsync();
+                return await _context.Employees.ToListAsync(cancellationToken);
             }
             catch (Exception e)
             {
@@ -73,12 +73,26 @@ namespace PeriferiaIT.PruebaTecnica.Employees.Infraestructure.Repository
 
         }
 
-        public async Task UpdateEmployee(Employee employee)
+        public async Task<IEnumerable<Employee>> GetEmployeesByDepartment(int id, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return await _context.Employees.Where(x => x.DepartmentId == id).ToListAsync(cancellationToken);
+            }
+            catch (Exception e)
+            {
+
+                _logger.LogError("Error get employees: " + e.Message);
+                throw;
+            }
+        }
+
+        public async Task UpdateEmployee(Employee employee, CancellationToken cancellationToken)
         {
             try
             {
                 _context.Entry(employee).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
             }
             catch (Exception e)
             {
