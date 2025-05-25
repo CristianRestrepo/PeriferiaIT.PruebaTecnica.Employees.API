@@ -1,7 +1,7 @@
 <b>Proyecto Employees API</b>
 <b>Detalles del proyecto</b>
 <div>
-  <p>El proyecto <b>PeriferiaIT.PruebaTecnica.Employees.API</b> es un Web API implementado con clean architecture y el patrón CQRS. Permite  creación de departamentos y empleados y ofrece los CRUDS necesarios para su administración.</p>
+  <p>El proyecto <b>PeriferiaIT.PruebaTecnica.Employees.API</b> es un Web API implementado con clean architecture y el patrón CQRS. Permite la creación de departamentos y empleados y ofrece los CRUDS necesarios para su administración.</p>
 </div>
 <div>
   <p>El proyecto implementa:</p>
@@ -35,7 +35,7 @@
   - <b>dotnet ef database update --project PeriferiaIT.PruebaTecnica.Employees.Infraestructure --startup-project PeriferiaIT.PruebaTecnica.Employees.API</b>
     - en caso de caso de que la consola indique que no se encuentra el comando, ejecutar:
       <b>dotnet tool install --global dotnet-ef --version 9.*</b>
-- Ejecutar el siguiente comando para levantar la API
+- Ejecutar el siguiente comando para levantar la API:
   <b>dotnet run --project PeriferiaIT.PruebaTecnica.Employees.API</b>
   - Si se desea acceder al swagger del proyecto ingresar al navegador a la URL: <b>[http://localhost:5153/swagger/index.html](http://localhost:5153/swagger/index.html)</b>
 - Para autorizarse en el endpoint de Login y generar el token JWT utilizar <b>admin</b> como usuario y contraseña.
