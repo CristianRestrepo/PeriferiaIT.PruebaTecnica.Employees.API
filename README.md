@@ -37,7 +37,7 @@
       <b>dotnet tool install --global dotnet-ef --version 9.*</b>
 - Ejecutar el siguiente comando para levantar la API
   <b>dotnet run --project PeriferiaIT.PruebaTecnica.Employees.API</b>
-  - Si se desea acceder al swagger del proyecto ingresar al navegador a la URL: <b>[http://localhost:5158/swagger/index.html](http://localhost:5153/swagger/index.html)</b>
+  - Si se desea acceder al swagger del proyecto ingresar al navegador a la URL: <b>[http://localhost:5153/swagger/index.html](http://localhost:5153/swagger/index.html)</b>
 - Para autorizarse en el endpoint de Login y generar el token JWT utilizar <b>admin</b> como usuario y contraseña.
 
   <b>Ejemplo Request:</b>
