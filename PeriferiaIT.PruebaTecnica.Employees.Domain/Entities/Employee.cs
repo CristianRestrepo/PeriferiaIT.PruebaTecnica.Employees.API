@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PeriferiaIT.PruebaTecnica.Employees.Domain.Common;
+﻿using PeriferiaIT.PruebaTecnica.Employees.Domain.Common;
 
 namespace PeriferiaIT.PruebaTecnica.Employees.Domain.Entities
 {

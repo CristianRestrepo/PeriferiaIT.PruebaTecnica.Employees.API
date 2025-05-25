@@ -19,8 +19,4 @@
     <ProjectReference Include="..\PeriferiaIT.PruebaTecnica.Employees.Domain\PeriferiaIT.PruebaTecnica.Employees.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Login\Command\" />
-  </ItemGroup>
-
 </Project>

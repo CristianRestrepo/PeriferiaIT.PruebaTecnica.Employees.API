@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PeriferiaIT.PruebaTecnica.Employees.Application.Login;
+using PeriferiaIT.PruebaTecnica.Employees.Application.Login.Command;
 
 namespace PeriferiaIT.PruebaTecnica.Employees.API.Controllers
 {

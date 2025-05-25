@@ -1,6 +1,5 @@
 ﻿using Moq;
 using PeriferiaIT.PruebaTecnica.Employees.Application.Employees.Commands;
-using PeriferiaIT.PruebaTecnica.Employees.Domain.Entities;
 using PeriferiaIT.PruebaTecnica.Employees.Domain.Interfaces.Repository;
 
 namespace PeriferiaIT.PruebaTecnica.Employees.Test.Application
